@@ -68,3 +68,7 @@ to SKOS
 __Marie__: At the beginning, OBO didn't have reasoning, etc.   Was not convenient 
 for community because they wanted to be able to work in Protege, use reasoners, etc.
 But applications still needed the OBO format, so kept in parallel.
+
+[Simon fixes the converter by updating to the latest Java, but Marie has
+difficulty configuring Java 1.8.0_91, so we postpone use of Simon's converter 
+until later and try to test some SPARQL queries.]
