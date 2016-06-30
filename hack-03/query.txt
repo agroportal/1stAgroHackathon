@@ -8,14 +8,38 @@ PREFIX dc: <DC.getURI()>
 Construct { 
   ?s rdf:type skos:Concept . 
   ?s skos:broader ?subC . 
- ?s skos:prefLabel ?label . 
+  ?s skos:prefLabel ?label . 
+  ?p rdfs:subPropertyOf skos:broader . 
+  ?s ?p ?o . 
+  ?p2 rdfs:subPropertyOf skos:related . 
+  ?s ?p2 ?oRel . 
+  ?restrictionP rdfs:subPropertyOf skos:related . 
+  ?s ?restrictionP ?restrictionC . 
+
 }
  where { 
 	  ?s rdf:type owl:Class .
 	  OPTIONAL { 
 		  ?s rdfs:subClassOf ?subC . 
+		 FILTER (!isBlank(?subC)) 
 	 }
 	  OPTIONAL { 
 		  ?s rdfs:label ?label . 
 	 }
+	  OPTIONAL { 
+	  ?x rdf:type owl:Restriction . 
+	  ?x owl:onProperty ?restrictionP . 
+	  ?x owl:someValuesFrom|owl:allValuesFrom ?restrictionC . 
+	  ?s rdfs:subClassOf|owl:equivalentClass ?x . 
+	 }
+	  OPTIONAL { 
+		  ?p rdf:type owl:TransitiveProperty . 
+		  ?s ?p ?o . 
+	 }
+	  OPTIONAL { 
+	  ?p2 rdf:type owl:ObjectProperty . 
+	 FILTER NOT EXISTS { ?p2 rdf:type owl:TransitiveProperty } . 
+	  ?s ?p2 ?oRel . 
+	
+ }
  }
