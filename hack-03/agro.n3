@@ -18,6 +18,16 @@ agro:Animal  a           owl:Class ;
         rdfs:label       "Animale"@it , "Animal"@fr , "Animal"@en ;
         rdfs:subClassOf  agro:LivingOrganism .
 
+agro:Herbivore  a        owl:Class ;
+        rdfs:subClassOf  [ a                  owl:Restriction ;
+                           owl:allValuesFrom  agro:Plant ;
+                           owl:onProperty     agro:eats
+                         ] ;
+        rdfs:subClassOf  [ a                   owl:Restriction ;
+                           owl:onProperty      agro:eats ;
+                           owl:someValuesFrom  agro:Plant
+                         ] .
+
 agro:p1  a          agro:Plant ;
         rdfs:label  "plant1"^^xsd:string ;
         agro:name   "Platanus wrighitii"^^xsd:string .
@@ -37,5 +47,5 @@ agro:name  a         owl:DatatypeProperty ;
 agro:leaf1  a          agro:Leaf ;
         agro:isPartOf  agro:p1 .
 
-agro:Cow  a        owl:Class ;
-        agro:eats  agro:Plant .
+agro:Cow  a              owl:Class ;
+        rdfs:subClassOf  agro:Herbivore .
