@@ -5,18 +5,20 @@
 @prefix agro:  <http://www.sw.fr/isa/agro#> .
 
 agro:Plant  a             owl:Class ;
+        rdfs:label        "Planta"@it , "Plante"@fr , "Plant"@en ;
         rdfs:subClassOf   agro:LivingOrganism ;
-        rdfs:label  "plant"^^xsd:string ;
         owl:disjointWith  agro:Animal .
 
 agro:Animal  a           owl:Class ;
+        rdfs:label       "Animale"@it , "Animal"@fr , "Animal"@en ;
         rdfs:subClassOf  agro:LivingOrganism .
 
 agro:p1  a          agro:Plant ;
         rdfs:label  "plant1"^^xsd:string ;
         agro:name   "Platanus wrighitii"^^xsd:string .
 
-agro:LivingOrganism  a  owl:Class .
+agro:LivingOrganism  a  owl:Class ;
+        rdfs:label  "Organismo Vivente"@it , "Organisme Vivant"@fr , "Living Organism"@en .
 
 agro:name  a         owl:DatatypeProperty ;
         rdfs:domain  agro:LivingOrganism ;
