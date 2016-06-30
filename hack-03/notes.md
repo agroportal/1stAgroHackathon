@@ -106,3 +106,46 @@ which can be used to convert the DCMI Type vocabulary.
 ----------------------------------------------------------------------
 Skosify - https://github.com/NatLibFi/Skosify
 
+You can use Skosify to transform any vocabulary-like RDF/RDFS/OWL ontology into
+SKOS format. You need to specify the way yor ontology structure maps to SKOS
+constructs using a configuration file. See the provided configuration file
+examples owl2skos.cfg and finnonto.cfg in the Skosify distribution package.
+
+The specification is performed by editing the configuration file sections
+[types], [literals] and [relations].
+
+Based on the three mappings, Skosify will change your ontology structure. This
+is a destructive operation: the old structure is replaced by the new
+(presumably more SKOS-like) structure.
+
+As an alternative, you can consider extending SKOS using RDFS subclass and
+subproperty definitions and use the RDFSInference capabilities of Skosify. In
+that approach, the original structure is kept intact. It may be more
+appropriate to do so if your ontology already follows SKOS conventions, but
+extends SKOS using RDFS.
+
+----------------------------------------------------------------------
+
+REQUIREMENTS
+1. SKOS browser must show subproperties of skos:broader.  Example:
+
+    agro:isPartOf 
+        rdfs:subPropertyOf skos:broader .
+   
+should be displayed as a hierarchy
+
+    skos:LivingOrganism
+      agro:Plant
+        agro:Animal
+          agro:Leaf
+
+...where leaf is "part of" (a subproperty of broader).
+
+2. Example:
+
+    agro:Cow
+      agro:eats  agro:Plant .
+
+If agro:eats is a subproperty of skos:related, this means that Cow is 
+somehow related to Plant.  However, this should not be part of the 
+display hierarchy.
