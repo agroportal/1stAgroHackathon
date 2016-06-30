@@ -4,6 +4,9 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix agro:  <http://www.sw.fr/isa/agro#> .
 
+agro:Leaf  a    owl:Class .
+agro:Leaf  agro:isPartOf  agro:Plant .
+
 agro:Plant  a             owl:Class ;
         rdfs:label        "Planta"@it , "Plante"@fr , "Plant"@en ;
         rdfs:subClassOf   agro:LivingOrganism ;
@@ -20,6 +23,13 @@ agro:p1  a          agro:Plant ;
 agro:LivingOrganism  a  owl:Class ;
         rdfs:label  "Organismo Vivente"@it , "Organisme Vivant"@fr , "Living Organism"@en .
 
+agro:isPartOf  a     owl:TransitiveProperty ;
+        rdfs:domain  agro:Leaf ;
+        rdfs:range   agro:Plant .
+
 agro:name  a         owl:DatatypeProperty ;
         rdfs:domain  agro:LivingOrganism ;
         rdfs:range   xsd:string .
+
+agro:leaf1  a          agro:Leaf ;
+        agro:isPartOf  agro:p1 .
