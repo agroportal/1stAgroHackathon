@@ -1,0 +1,24 @@
+__Simon__: "These properties map to broader / narrower." -- Input to the 
+conversion process, to know which properties are hierarchical.  When you are
+visualizing in generic visualizer -- view as a tree.  OBO "develops from" and 
+"part of" -- for alot of ontologies, just a flat list.  If the broader part 
+is transitive.  "For these object properties." -- we can specify.  Gazetteer is 
+a good example.  To make sense, have to treat as hierarchical.  Need some way to 
+input which ones.  By default, "related".  
+
+__Marie__: OWL class should be SKOS Concept? [Yes].
+
+__Simon__: For OBO library ontologies, they have a standard set of annotation 
+properties that we could map to SKOS.  Synonyms and definition.  Then any 
+transitive object property would map to SKOS broader.  But we know that part_of 
+and develops_from map to SKOS broader - and they are the ones that are mostly.
+170 ontologies in the OBO library would be covered.  Everything else maps by 
+default to SKOS related.  Then question: superclass descriptions - whether you 
+collect all the entitie and have them as related, which I think would be 
+reasonable for SKOS representation.  
+
+Good case for SKOS representation, because Bioportal - not possible to navigate 
+via properties that are in anonymous class descriptions.
+
+http://mowl-power.cs.man.ac.uk:8080/obotoskos
+http://www.cs.man.ac.uk/~sjupp/skos/index.html - the mappings
