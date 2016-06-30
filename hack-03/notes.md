@@ -74,7 +74,23 @@ difficulty configuring Java 1.8.0_91, so we postpone use of Simon's converter
 until later and try to test some SPARQL queries.]
 
 ----------------------------------------------------------------------
-Osma Suominen writes:
+Tom writes to Osma:
+
+The Hackathon started yesterday evening, and there is interest in exploring
+whether it could be useful to make a browsing interface for OWL ontologies
+based on a back-end, lossy translation into SKOS.
+
+Simon Jupp from Manchester is here.  He wrote about SKOS and OWL many years
+ago, and uses SKOS this way in his work.  I gather he uses various heuristics
+for turning some of the ontology relations into partOf.
+
+The idea would be that, say, Plant Ontology could be translated into SKOS and
+loaded into Skosmos or AgroPortal for simple browsing.
+
+Interesting? Crazy?  Has anyone there discussed such a thing?
+
+----------------------------------------------------------------------
+Osma Suominen responds:
 
 This is something we do quite routinely at NLF. YSO and its many domain
 specific extensions are maintained as OWL ontologies (though nowadays most of
