@@ -19,6 +19,7 @@ agro:Animal  a           owl:Class ;
         rdfs:subClassOf  agro:LivingOrganism .
 
 agro:Herbivore  a        owl:Class ;
+        rdfs:subClassOf  agro:Animal ;
         rdfs:subClassOf  [ a                  owl:Restriction ;
                            owl:allValuesFrom  agro:Plant ;
                            owl:onProperty     agro:eats
@@ -37,12 +38,19 @@ agro:LivingOrganism  a  owl:Class ;
         rdfs:label    "Organismo Vivente"@it , "Organisme Vivant"@fr , "Living Organism"@en .
 
 agro:isPartOf  a     owl:TransitiveProperty ;
-        rdfs:domain  agro:Cow , agro:Leaf ;
-        rdfs:range   agro:Leaf , agro:Plant .
+        rdfs:domain  agro:Leaf ;
+        rdfs:range   agro:Plant .
 
 agro:name  a         owl:DatatypeProperty ;
         rdfs:domain  agro:LivingOrganism ;
         rdfs:range   xsd:string .
+
+agro:Carnivore  a            owl:Class ;
+        rdfs:subClassOf      agro:Animal ;
+        owl:equivalentClass  [ a                  owl:Restriction ;
+                               owl:allValuesFrom  agro:Animal ;
+                               owl:onProperty     agro:eats
+                             ] .
 
 agro:leaf1  a          agro:Leaf ;
         agro:isPartOf  agro:p1 .
