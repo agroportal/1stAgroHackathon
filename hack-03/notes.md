@@ -149,3 +149,13 @@ should be displayed as a hierarchy
 If agro:eats is a subproperty of skos:related, this means that Cow is 
 somehow related to Plant.  However, this should not be part of the 
 display hierarchy.
+
+----------------------------------------------------------------------
+Skosify
+
+     $ skosify.py agro.n3 -o agro-skos.rdf
+     INFO: Don't know what to do with type http://www.sw.fr/isa/agro#Leaf
+     INFO: Don't know what to do with type http://www.sw.fr/isa/agro#Plant
+     INFO: No skos:ConceptScheme or owl:Ontology found. Using namespace auto-detection for creating concept scheme.
+     CRITICAL: Namespace auto-detection failed. Set namespace using the --namespace option.
+
