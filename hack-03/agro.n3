@@ -1,0 +1,23 @@
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix agro:  <http://www.sw.fr/isa/agro#> .
+
+agro:Plant  a             owl:Class ;
+        rdfs:subClassOf   agro:LivingOrganism ;
+        owl:disjointWith  agro:Animal .
+
+agro:Animal  a           owl:Class ;
+        rdfs:subClassOf  agro:LivingOrganism .
+
+agro:p1  a         agro:Plant ;
+        agro:name  "plant1"^^xsd:string .
+
+agro:LivingOrganism  a  owl:Class .
+
+agro:name  a         owl:DatatypeProperty ;
+        rdfs:domain  agro:LivingOrganism ;
+        rdfs:range   xsd:string .
+
+agro:valeurIndice  a  owl:DatatypeProperty .
