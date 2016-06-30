@@ -1,0 +1,21 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  
+PREFIX owl: <OWL.getURI()>  
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> 
+PREFIX agront: <http://aims.fao.org/aos/agrontology#>  
+PREFIX dc: <DC.getURI()>  
+Construct { 
+  ?s rdf:type skos:Concept . 
+  ?s skos:broader ?subC . 
+ ?s skos:prefLabel ?label . 
+}
+ where { 
+	  ?s rdf:type owl:Class .
+	  OPTIONAL { 
+		  ?s rdfs:subClassOf ?subC . 
+	 }
+	  OPTIONAL { 
+		  ?s rdfs:label ?label . 
+	 }
+ }

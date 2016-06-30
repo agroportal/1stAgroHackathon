@@ -6,6 +6,7 @@
 
 agro:Plant  a             owl:Class ;
         rdfs:subClassOf   agro:LivingOrganism ;
+        rdfs:label  "plant"^^xsd:string ;
         owl:disjointWith  agro:Animal .
 
 agro:Animal  a           owl:Class ;
