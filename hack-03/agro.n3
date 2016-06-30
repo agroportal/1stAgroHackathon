@@ -29,6 +29,8 @@ agro:Herbivore  a        owl:Class ;
                            owl:someValuesFrom  agro:Plant
                          ] .
 
+agro:   a       owl:Ontology .
+
 agro:p1  a          agro:Plant ;
         rdfs:label  "plant1"^^xsd:string ;
         agro:name   "Platanus wrighitii"^^xsd:string .
