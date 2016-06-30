@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.com/obo2skos#"
+     xml:base="http://example.com/obo2skos"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:obo2skos="http://example.com/obo2skos#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://example.com/obo2skos"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.com/obo2skos#is-a -->
+
+    <owl:ObjectProperty rdf:about="http://example.com/obo2skos#is-a">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#broader"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://example.com/obo2skos#super-class-of -->
+
+    <owl:ObjectProperty rdf:about="http://example.com/obo2skos#super-class-of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#narrower"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#broader -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#broader"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#narrower -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/02/skos/core#narrower"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#notation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/02/skos/core#notation"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#prefLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/02/skos/core#prefLabel"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#ConceptScheme -->
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.com/obo2skos#Animal -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/obo2skos#Animal">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animal</skos:notation>
+        <skos:prefLabel xml:lang="en">Animal</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Animale</skos:prefLabel>
+        <is-a rdf:resource="http://example.com/obo2skos#LivingOrganism"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.com/obo2skos#LivingOrganism -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/obo2skos#LivingOrganism">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LivingOrganism</skos:notation>
+        <skos:prefLabel xml:lang="en">Living Organism</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Organisme Vivant</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Organismo Vivente</skos:prefLabel>
+        <super-class-of rdf:resource="http://example.com/obo2skos#Animal"/>
+        <super-class-of rdf:resource="http://example.com/obo2skos#Plant"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.com/obo2skos#Plant -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/obo2skos#Plant">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Plant</skos:notation>
+        <skos:prefLabel xml:lang="en">Plant</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Planta</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Plante</skos:prefLabel>
+        <is-a rdf:resource="http://example.com/obo2skos#LivingOrganism"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.com/obo2skos#scheme_24580593930540 -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/obo2skos#scheme_24580593930540">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.3-SNAPSHOT) http://owlapi.sourceforge.net -->
+
