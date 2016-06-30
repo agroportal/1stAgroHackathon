@@ -72,3 +72,18 @@ But applications still needed the OBO format, so kept in parallel.
 [Simon fixes the converter by updating to the latest Java, but Marie has
 difficulty configuring Java 1.8.0_91, so we postpone use of Simon's converter 
 until later and try to test some SPARQL queries.]
+
+----------------------------------------------------------------------
+Osma Suominen writes:
+
+This is something we do quite routinely at NLF. YSO and its many domain
+specific extensions are maintained as OWL ontologies (though nowadays most of
+the properties are from SKOS) and translated to SKOS using Skosify as part of
+the publishing process. Skosify can use a mapping file to convert e.g.
+owl:Class into skos:Concept and rdfs:label into skos:prefLabel.
+
+See https://github.com/NatLibFi/Skosify/wiki/OWL-conversion-to-SKOS
+and the example configuration file
+https://github.com/NatLibFi/Skosify/blob/master/owl2skos.cfg
+which can be used to convert the DCMI Type vocabulary.
+
