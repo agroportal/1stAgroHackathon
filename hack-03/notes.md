@@ -20,5 +20,18 @@ reasonable for SKOS representation.
 Good case for SKOS representation, because Bioportal - not possible to navigate 
 via properties that are in anonymous class descriptions.
 
-http://mowl-power.cs.man.ac.uk:8080/obotoskos
-http://www.cs.man.ac.uk/~sjupp/skos/index.html - the mappings
+Simon Jupp
+* http://mowl-power.cs.man.ac.uk:8080/obotoskos
+* http://www.cs.man.ac.uk/~sjupp/skos/index.html - the mappings
+
+
+* https://github.com/ontodev/robot
+  Can convert between ontology formats.  The default format is RDF/XML, but 
+  there are other RDF formats and the OBO file format.
+
+    robot convert --input annotated.owl --output results/annotated.obo
+
+1. Possibly, ROBOT could convert from OWL to SKOS - but this is just an 
+   idea...
+2. Convert OWL to OBO (Simon), then OBO to SKOS.
+3. Maybe easier, SPARQL to convert from 
