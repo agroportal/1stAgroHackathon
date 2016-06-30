@@ -11,13 +11,12 @@ agro:Plant  a             owl:Class ;
 agro:Animal  a           owl:Class ;
         rdfs:subClassOf  agro:LivingOrganism .
 
-agro:p1  a         agro:Plant ;
-        agro:name  "plant1"^^xsd:string .
+agro:p1  a          agro:Plant ;
+        rdfs:label  "plant1"^^xsd:string ;
+        agro:name   "Platanus wrighitii"^^xsd:string .
 
 agro:LivingOrganism  a  owl:Class .
 
 agro:name  a         owl:DatatypeProperty ;
         rdfs:domain  agro:LivingOrganism ;
         rdfs:range   xsd:string .
-
-agro:valeurIndice  a  owl:DatatypeProperty .
