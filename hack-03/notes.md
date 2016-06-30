@@ -103,3 +103,6 @@ and the example configuration file
 https://github.com/NatLibFi/Skosify/blob/master/owl2skos.cfg
 which can be used to convert the DCMI Type vocabulary.
 
+----------------------------------------------------------------------
+Skosify - https://github.com/NatLibFi/Skosify
+
