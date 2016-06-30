@@ -35,3 +35,36 @@ Simon Jupp
    idea...
 2. Convert OWL to OBO (Simon), then OBO to SKOS.
 3. Maybe easier, SPARQL to convert from 
+
+----------------------------------------------------------------------
+OBO
+
+    [Term]
+    id: CL:0000097
+    name: mast cell
+    def: "A cell that is found in almost all tissues containing numerous basophilic granules and capable of releasing large amounts of histamine and
+    heparin upon activation." [GOC:add, ISBN:068340007X, MESH:A.11.329.427]
+    related_synonym: "tissue basophil" [ISBN:068340007X]
+    exact_synonym: "labrocyte" [ISBN:0721601464]
+    exact_synonym: "mastocyte" [ISBN:0721601464]
+    is_a: CL:0000766 ! myeloid leukocyte
+    relationship: develops_from CL:0000831 ! mast cell progenitor
+
+to SKOS
+
+    :CL_0000097
+        :develops_from :CL_0000831 ;
+        :is-a :CL_0000766 ;
+        :super-class-of :CL_0000484, :CL_0000485 ;
+        a skos:Concept ;
+        skos:altLabel "\"labrocyte\" [ISBN:0721601464]"@en, "\"mastocyte\" [ISBN:0721601464]"@en, "\"tissue basophil\" [ISBN:068340007X]"@en ;
+        skos:definition "\"A cell that is found in almost all tissues containing numerous basophilic granules and capable of releasing large amounts
+    of histamine and heparin upon activation.\" [GOC:add, ISBN:068340007X, MESH:A.11.329.427]"@en ;
+        skos:notation "CL:0000097"^^xsd:string ;
+        skos:prefLabel "mast cell"@en .
+
+----------------------------------------------------------------------
+
+__Marie__: At the beginning, OBO didn't have reasoning, etc.   Was not convenient 
+for community because they wanted to be able to work in Protege, use reasoners, etc.
+But applications still needed the OBO format, so kept in parallel.
