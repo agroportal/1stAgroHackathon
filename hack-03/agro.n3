@@ -6,46 +6,46 @@
 
 agro:eats  a    owl:ObjectProperty .
 
-agro:Leaf  a           owl:Class ;
-        agro:isPartOf  agro:Plant .
+agro:Cow  a              owl:Class ;
+        rdfs:subClassOf  agro:Herbivore .
+
+_:b0    a                   owl:Restriction ;
+        owl:onProperty      agro:eats ;
+        owl:someValuesFrom  agro:Plant .
 
 agro:Plant  a             owl:Class ;
         rdfs:label        "Planta"@it , "Plante"@fr , "Plant"@en ;
         rdfs:subClassOf   agro:LivingOrganism ;
         owl:disjointWith  agro:Animal .
 
-agro:Animal  a           owl:Class ;
-        rdfs:label       "Animale"@it , "Animal"@fr , "Animal"@en ;
-        rdfs:subClassOf  agro:LivingOrganism .
-
-agro:Herbivore  a        owl:Class ;
-        rdfs:subClassOf  agro:Animal ;
-        rdfs:subClassOf  [ a                  owl:Restriction ;
-                           owl:allValuesFrom  agro:Plant ;
-                           owl:onProperty     agro:eats
-                         ] ;
-        rdfs:subClassOf  [ a                   owl:Restriction ;
-                           owl:onProperty      agro:eats ;
-                           owl:someValuesFrom  agro:Plant
-                         ] .
-
 agro:   a       owl:Ontology .
+
+agro:Omnivore  a             owl:Class ;
+        owl:equivalentClass  [ a                   owl:Class ;
+                               owl:intersectionOf  ( _:b0 [ a                   owl:Restriction ;
+                                                            owl:onProperty      agro:eats ;
+                                                            owl:someValuesFrom  agro:Animal
+                                                          ] agro:Animal )
+                             ] .
 
 agro:p1  a          agro:Plant ;
         rdfs:label  "plant1"^^xsd:string ;
         agro:name   "Platanus wrighitii"^^xsd:string .
 
-agro:LivingOrganism  a  owl:Class ;
-        rdfs:comment  "In biology, an organism is any contiguous living system, such as an animal, plant, fungus, or bacterium"@en ;
-        rdfs:label    "Organismo Vivente"@it , "Organisme Vivant"@fr , "Living Organism"@en .
+agro:Herbivore  a        owl:Class ;
+        rdfs:subClassOf  _:b0 , agro:Animal ;
+        rdfs:subClassOf  [ a                  owl:Restriction ;
+                           owl:allValuesFrom  agro:Plant ;
+                           owl:onProperty     agro:eats
+                         ] .
 
 agro:isPartOf  a     owl:TransitiveProperty ;
         rdfs:domain  agro:Leaf ;
         rdfs:range   agro:Plant .
 
-agro:name  a         owl:DatatypeProperty ;
-        rdfs:domain  agro:LivingOrganism ;
-        rdfs:range   xsd:string .
+agro:Animal  a           owl:Class ;
+        rdfs:label       "Animale"@it , "Animal"@fr , "Animal"@en ;
+        rdfs:subClassOf  agro:LivingOrganism .
 
 agro:Carnivore  a            owl:Class ;
         rdfs:subClassOf      agro:Animal ;
@@ -54,8 +54,16 @@ agro:Carnivore  a            owl:Class ;
                                owl:onProperty     agro:eats
                              ] .
 
+agro:Leaf  a           owl:Class ;
+        agro:isPartOf  agro:Plant .
+
+agro:LivingOrganism  a  owl:Class ;
+        rdfs:comment  "In biology, an organism is any contiguous living system, such as an animal, plant, fungus, or bacterium"@en ;
+        rdfs:label    "Organismo Vivente"@it , "Organisme Vivant"@fr , "Living Organism"@en .
+
 agro:leaf1  a          agro:Leaf ;
         agro:isPartOf  agro:p1 .
 
-agro:Cow  a              owl:Class ;
-        rdfs:subClassOf  agro:Herbivore .
+agro:name  a         owl:DatatypeProperty ;
+        rdfs:domain  agro:LivingOrganism ;
+        rdfs:range   xsd:string .
