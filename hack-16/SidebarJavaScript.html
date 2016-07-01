@@ -1,0 +1,186 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+
+    /**
+     * Run initializations on sidebar load.
+     */
+    $(function() {
+        // Assign handler functions to sidebar elements here, if needed.
+
+        // Call the server here to retrieve any information needed to build
+        // the dialog, if necessary.
+
+        // Start polling for updates
+        poll();
+    });
+
+/**
+ * Poll a server-side function at the given interval, to have
+ * results passed to a successHandler callback.
+ *
+ * http://stackoverflow.com/a/24773178/1677912
+ *
+ * @param {Number} interval   (optional) Time in ms between polls.
+ *                            Default is 2s (2000ms)
+ */
+function poll(interval) {
+    interval = interval || 1000;
+    setTimeout(function() {
+        google.script.run
+            .withSuccessHandler(showCell)
+            .withFailureHandler(
+                function(msg, element) {
+                    showStatus(msg, $('#button-bar'));
+                    element.disabled = false;
+                })
+            .getSelectedCell();
+    }, interval);
+}
+
+/**
+ * Callback function to display a "record", or row of the spreadsheet.
+ *
+ * @param {object[]}  Array of field headings & cell values
+ */
+function showCell(record) {
+    if ( $('#selected').text() != record ) {
+        $('#selected').text(record);
+
+
+        google.script.run
+            .withSuccessHandler(renderZoomaResult)
+            .withFailureHandler(
+                function(msg, element) {
+                    showStatus(msg, $('#button-bar'));
+                    element.disabled = false;
+                })
+            .getZoomaResult(record);
+
+
+
+    }
+    // TODO: hide any existing fields that are beyond the current record length
+
+    //Setup the next poll
+    poll();
+}
+
+
+function renderNcboResult(result) {
+
+    $('#agroportal-result').empty();
+
+    if (result.collection.length > 0) {
+        var ncboTable = $('<table/>').append($('<th>URI</th><th>Label</th><th>Source</th>'));
+
+        for (var zr = 0 ; zr < result.collection.length; zr++) {
+
+            var link = uriLink(result.collection[zr]["@id"], result.collection[zr].links.ui);
+            var tagCell = $('<td/>').append(link);
+            var labelCell = $('<td/>').append(result.collection[zr].prefLabel);
+            var sourceCell = $('<td/>').append(getShortFrom(result.collection[zr].links.ontology));
+            var tr = $('<tr/>').attr('class', 'MEDIUM');
+
+            tr.append(tagCell);
+            tr.append(labelCell);
+            tr.append(sourceCell);
+
+            ncboTable.append(tr);
+        }
+        $('#agroportal-result').append(ncboTable);
+
+    }
+
+
+}
+
+
+function renderZoomaResult(result) {
+
+    // clear any previous result
+    $('#zooma-result').empty();
+    $('#agroportal-result').empty();
+
+    var zoomaTable = $('<table/>').append($('<th>URI</th><th>Label</th><th>Source</th>'));
+
+    if (result.length > 0) {
+        for (var zr = 0 ; zr < result.length; zr++) {
+
+            var tagCell = $('<td/>');
+            for (var tags = 0; tags < result[zr].semanticTags.length; tags++) {
+                var tag = result[zr].semanticTags[tags];
+                tagCell.append(uriLink(tag)).append('<br/>');
+            }
+
+            var labelCell = $('<td/>').append(result[zr].derivedFrom.annotatedProperty.propertyValue);
+            var sourceCell = $('<td/>').append(result[zr].derivedFrom.provenance.source.name);
+
+            var tr = $('<tr/>').attr('class', result[zr].confidence);
+
+            tr.append(tagCell);
+            tr.append(labelCell);
+            tr.append(sourceCell);
+
+            zoomaTable.append(tr);
+
+        }
+        $('#zooma-result').append(zoomaTable);
+
+    }
+
+
+    if (result.length ==0) {
+        google.script.run
+            .withSuccessHandler(renderNcboResult)
+            .withFailureHandler(
+                function(msg, element) {
+                    showStatus(msg, $('#button-bar'));
+                    element.disabled = false;
+                })
+            .getNcboResult($('#selected').text());
+    }
+}
+
+function uriLink (uri, target) {
+    if (target == null) {
+        target = uri;
+    }
+
+    var short = getShortFrom (uri);
+    return $('<a>',{
+        text: short,
+        title: uri,
+        href: target,
+        target : "_blank"
+    })
+}
+
+function getShortFrom (uri) {
+
+    var shortform;
+    if (uri.indexOf("#") > -1) {
+        shortform = uri.substring(uri.indexOf("#")+1, uri.length)
+    }
+    else {
+        shortform = uri.substring(uri.lastIndexOf("/")+1, uri.length)
+
+    }
+
+    return shortform;
+}
+
+/**
+ * Displays the given status message in the sidebar.
+ *
+ * @param {String} msg The status message to display.
+ * @param {String} classId The message type (class id) that the message
+ *   should be displayed as.
+ */
+function showStatus(msg, classId) {
+    $('#sidebar-status').removeClass().html(msg);
+    if (classId) {
+        $('#sidebar-status').addClass(classId);
+    }
+}
+
+</script>
