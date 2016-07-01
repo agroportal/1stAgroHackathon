@@ -6,19 +6,25 @@
 
 agro:eats  a    owl:ObjectProperty .
 
-agro:Cow  a              owl:Class ;
-        rdfs:subClassOf  agro:Herbivore .
-
 _:b0    a                   owl:Restriction ;
         owl:onProperty      agro:eats ;
         owl:someValuesFrom  agro:Plant .
+
+agro:Cow  a              owl:Class ;
+        rdfs:subClassOf  agro:Herbivore .
 
 agro:Plant  a             owl:Class ;
         rdfs:label        "Planta"@it , "Plante"@fr , "Plant"@en ;
         rdfs:subClassOf   agro:LivingOrganism ;
         owl:disjointWith  agro:Animal .
 
-agro:   a       owl:Ontology .
+agro:   a       owl:Ontology ;
+        <http://purl.org/dc/terms/creator>
+                "Isabelle Mougenot" , "Caterina Caracciolo" , "Stella Zevio" , "Marie-Angelique Laporte" , "Simon Jupp" , "Tom Baker" ;
+        <http://purl.org/dc/terms/issued>
+                "2016-07-01"^^xsd:date ;
+        <http://purl.org/dc/terms/title>
+                "The ontology beta-test" .
 
 agro:Omnivore  a             owl:Class ;
         owl:equivalentClass  [ a                   owl:Class ;
