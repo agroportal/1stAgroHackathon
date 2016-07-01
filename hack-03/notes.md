@@ -57,9 +57,8 @@ to SKOS
         :is-a :CL_0000766 ;
         :super-class-of :CL_0000484, :CL_0000485 ;
         a skos:Concept ;
-        skos:altLabel "\"labrocyte\" [ISBN:0721601464]"@en, "\"mastocyte\" [ISBN:0721601464]"@en, "\"tissue basophil\" [ISBN:068340007X]"@en ;
-        skos:definition "\"A cell that is found in almost all tissues containing numerous basophilic granules and capable of releasing large amounts
-    of histamine and heparin upon activation.\" [GOC:add, ISBN:068340007X, MESH:A.11.329.427]"@en ;
+        skos:altLabel "\"labrocyte\" [ISBN:0721601464]"@en, "\"mastocyte\" [ISBN:0721601464]"@en, ...
+        skos:definition "\"A cell that is found in almost all tissues containing ...
         skos:notation "CL:0000097"^^xsd:string ;
         skos:prefLabel "mast cell"@en .
 
