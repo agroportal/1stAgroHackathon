@@ -22,46 +22,41 @@ agro:
 
 agro:LivingOrganism
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
       skos:definition "In biology, an organism is any contiguous living system, such as an animal, plant, fungus, or bacterium"@en ;
       skos:inScheme agro: ;
       skos:prefLabel "Living Organism"@en , "Organismo Vivente"@it , "Organisme Vivant"@fr .
 
 agro:Animal
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
       skos:broader agro:LivingOrganism ;
       skos:inScheme agro: ;
       skos:prefLabel "Animal"@en , "Animal"@fr , "Animale"@it .
 
 agro:Carnivore
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
+      agro:eats agro:Animal ;
       skos:broader agro:Animal ;
       skos:inScheme agro: .
 
 agro:Leaf
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
       agro:isPartOf agro:Plant ;
       skos:inScheme agro: .
 
 agro:Plant
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
       skos:broader agro:LivingOrganism ;
       skos:inScheme agro: ;
       skos:prefLabel "Planta"@it , "Plant"@en , "Plante"@fr .
 
 agro:Cow
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
       skos:broader agro:Herbivore ;
       skos:inScheme agro: .
 
 agro:Herbivore
       a       skos:Concept ;
-      agro:eats agro:Animal , agro:Plant ;
+      agro:eats agro:Plant ;
       skos:broader agro:Animal ;
       skos:inScheme agro: .
 

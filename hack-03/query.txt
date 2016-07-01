@@ -18,9 +18,9 @@ CONSTRUCT {
   ?s ?p2 ?oRel . 
   ?restrictionP rdfs:subPropertyOf skos:related . 
   ?s ?restrictionP ?restrictionC . 
-  ?s skos:related ?itemSimple . 
-  ?itemP rdfs:subPropertyOf skos:related . 
-  ?s ?itemP ?itemC . 
+  ?s skos:related ?item . 
+  ?itemP rdfs:subPropertyOf skos:related .
+  ?s ?itemP ?itemC .
   ?s ?DCPropS ?propertiesValS . 
   ?cs ?DCProp ?propertiesVal . 
   ?propAnn rdfs:subPropertyOf skos:note . 
@@ -46,11 +46,11 @@ WHERE {
      }
       OPTIONAL { 
       ?cs ?DCProp ?propertiesVal . 
-      FILTER (STRSTARTS(STR(?DCProp), \http://purl.org/dc/terms\)) 
+      FILTER (STRSTARTS(STR(?DCProp), "http://purl.org/dc/terms")) 
      }
       OPTIONAL { 
       ?s ?DCPropS ?propertiesValS . 
-      FILTER (STRSTARTS(STR(?DCPropS), \http://purl.org/dc/terms\)) 
+      FILTER (STRSTARTS(STR(?DCPropS), "http://purl.org/dc/terms")) 
      }
       OPTIONAL { 
       ?s ?propAnn ?annVal . 
@@ -67,15 +67,18 @@ WHERE {
       ?s rdfs:subClassOf|owl:equivalentClass ?x . 
      }
       OPTIONAL { 
-      {?s owl:equivalentClass ?intersertion . 
+      ?s owl:equivalentClass ?intersertion .
       ?intersertion owl:intersectionOf|owl:unionOf ?list .
-      ?list rdf:rest*/rdf:first ?item . 
-      ?item rdf:type owl:Class . 
-      BIND (?item as ?itemSimple) . 
-     } UNION {
-      ?item owl:onProperty ?itemP . 
-      ?item owl:someValuesFrom|owl:allValuesFrom ?itemC . 
-     }
+      ?list rdf:rest*/rdf:first ?item .
+      ?item rdf:type owl:Class .
+      }   
+      OPTIONAL {
+      ?s owl:equivalentClass ?intersertionR .
+      ?intersertionR owl:intersectionOf|owl:unionOf ?listR .
+      ?listR rdf:rest*/rdf:first ?itemR .
+      ?itemR owl:onProperty ?itemP .
+      ?itemR owl:someValuesFrom|owl:allValuesFrom ?itemC .
+      }
      }
       OPTIONAL { 
           ?p rdf:type owl:TransitiveProperty . 
