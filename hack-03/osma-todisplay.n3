@@ -1,0 +1,36 @@
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix agro:  <http://www.sw.fr/isa/agro#> .
+@prefix dc:    <http://purl.org/dc/terms/> .
+
+agro:eats  rdfs:subPropertyOf  skos:related .
+
+agro:Leaf  a           skos:Concept ;
+        agro:isPartOf  agro:Plant .
+
+agro:Plant  a           skos:Concept ;
+        skos:broader    agro:LivingOrganism ;
+        skos:prefLabel  "Planta"@it , "Plante"@fr , "Plant"@en .
+
+agro:Animal  a          skos:Concept ;
+        skos:broader    agro:LivingOrganism ;
+        skos:prefLabel  "Animale"@it , "Animal"@fr , "Animal"@en .
+
+agro:Herbivore  a     skos:Concept ;
+        agro:eats     agro:Plant ;
+        skos:broader  agro:Animal .
+
+agro:LivingOrganism  a  skos:Concept ;
+        skos:prefLabel  "Organismo Vivente"@it , "Organisme Vivant"@fr , "Living Organism"@en .
+
+agro:isPartOf  rdfs:subPropertyOf  skos:broader .
+
+agro:Carnivore  a     skos:Concept ;
+        agro:eats     agro:Animal ;
+        skos:broader  agro:Animal .
+
+agro:Cow  a           skos:Concept ;
+        skos:broader  agro:Herbivore .
