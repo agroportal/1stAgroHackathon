@@ -1,0 +1,30 @@
+<!-- Use a templated HTML printing scriptlet to import common stylesheet. -->
+<?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?>
+
+<!-- Below is the HTML code that defines the sidebar element structure. -->
+<div class="sidebar branding-below">
+  <p id="selected">
+  
+  </p>
+  
+  <hr/>
+  
+  <div>
+  <h4>Results from Zooma</h4>
+  
+  <div id="zooma-result">
+  </div>
+  
+  </div>
+  
+  <div>
+  
+  <h4>Results from Agroportal</h4>
+  
+  <div id="agroportal-result"></div>
+  </div>
+</div>
+
+
+<!-- Use a templated HTML printing scriptlet to import JavaScript. -->
+<?!= HtmlService.createHtmlOutputFromFile('SidebarJavaScript').getContent(); ?>

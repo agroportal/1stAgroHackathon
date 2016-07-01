@@ -65,3 +65,15 @@ Annotator.config do |config|
     config.tree_tagger_path = "/srv/treetagger"
 end
 ```
+
+## Changing UI
+
+Just have to define the recognizer array in the annotator controller
+
+```ruby
+@recognizers = parse_json(REST_URI + "/annotator/recognizers")
+# It can be filled with a simple array
+@recognizers = ["mgrep","alvis"]
+```
+
+https://github.com/agroportal/agroportal_web_ui/blob/master/app/controllers/annotator_controller.rb#L19
