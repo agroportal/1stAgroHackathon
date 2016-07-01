@@ -4,9 +4,8 @@ Information extraction from publications on viticulture research.
 
 ### Branch locations for modified BioPortal services:
 
-https://github.com/agroportal/ontologies_api/tree/hack-14
-
-https://github.com/agroportal/agroportal_web_ui/tree/hack-14
+* https://github.com/agroportal/ontologies_api/tree/hack-14
+* https://github.com/agroportal/agroportal_web_ui/tree/hack-14
 
 ### Sample API call
 
