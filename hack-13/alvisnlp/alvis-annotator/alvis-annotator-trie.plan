@@ -1,0 +1,9 @@
+<alvisnlp-plan id="agro-annotator-trie">
+  <search class="SimpleProjector2">
+    <dictFile>dictionary-lemma.txt</dictFile>
+    <targetLayerName>concepts</targetLayerName>
+    <valueFeatures>id,entry</valueFeatures>
+    <keyIndex>1</keyIndex>
+    <trieSink>dictionary-lemma.trie</trieSink>
+  </search>
+</alvisnlp-plan>

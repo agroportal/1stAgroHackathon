@@ -1,0 +1,31 @@
+<alvisnlp-plan id="lemmatize-dictionary">
+
+  <module id="read" class="TabularReader">
+    <source>dictionary.txt</source>
+    <sourceElement>$</sourceElement>
+    <lineActions>
+      new:document(tab:column(0)).new:section:label(tab:column(1))
+    </lineActions>
+    <createDocuments/>
+    <createSections/>
+  </module>
+
+  <import>res://org.bibliome.alvisnlp.resources/segmentation.plan</import>
+
+  <lemmatize class="TreeTagger">
+    <treeTaggerExecutable>/home/rbossy/dist/tree-tagger/bin/tree-tagger</treeTaggerExecutable>
+    <parFile>/home/rbossy/dist/tree-tagger/english-par-linux-3.2.bin</parFile>
+    <noUnknownLemma/>
+  </lemmatize>
+
+  <write class="TabularExport">
+    <outDir>.</outDir>
+    <files>$</files>
+    <fileName>"dictionary-lemmatized.txt"</fileName>
+    <lines>documents</lines>
+    <columns separator=";">
+      @id;
+      str:join:' '(sections.layer:words, @lemma)
+    </columns>
+  </write>
+</alvisnlp-plan>
