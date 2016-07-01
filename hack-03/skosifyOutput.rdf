@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:agro="http://www.sw.fr/isa/agro#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:nodeID="ub1bL22C26">
+    <owl:onProperty rdf:resource="http://www.sw.fr/isa/agro#eats"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.sw.fr/isa/agro#Plant"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#p1">
+    <rdf:type rdf:resource="http://www.sw.fr/isa/agro#Plant"/>
+    <agro:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Platanus wrighitii</agro:name>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">plant1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#Plant">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:disjointWith rdf:resource="http://www.sw.fr/isa/agro#Animal"/>
+    <rdfs:label xml:lang="en">Plant</rdfs:label>
+    <rdfs:label xml:lang="fr">Plante</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.sw.fr/isa/agro#LivingOrganism"/>
+    <rdfs:label xml:lang="it">Planta</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#LivingOrganism">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="fr">Organisme Vivant</rdfs:label>
+    <rdfs:label xml:lang="it">Organismo Vivente</rdfs:label>
+    <rdfs:comment xml:lang="en">In biology, an organism is any contiguous living system, such as an animal, plant, fungus, or bacterium</rdfs:comment>
+    <rdfs:label xml:lang="en">Living Organism</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#isPartOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    <rdfs:range rdf:resource="http://www.sw.fr/isa/agro#Plant"/>
+    <rdfs:domain rdf:resource="http://www.sw.fr/isa/agro#Leaf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#Animal">
+    <rdfs:label xml:lang="fr">Animal</rdfs:label>
+    <rdfs:label xml:lang="it">Animale</rdfs:label>
+    <rdfs:label xml:lang="en">Animal</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="http://www.sw.fr/isa/agro#LivingOrganism"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#eats">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#Herbivore">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:nodeID="ub1bL22C26"/>
+    <rdfs:subClassOf rdf:resource="http://www.sw.fr/isa/agro#Animal"/>
+    <rdfs:subClassOf rdf:nodeID="ub1bL26C26"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="ub1bL26C26">
+    <owl:someValuesFrom rdf:resource="http://www.sw.fr/isa/agro#Plant"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://www.sw.fr/isa/agro#eats"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://www.sw.fr/isa/agro#LivingOrganism"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#Carnivore">
+    <owl:equivalentClass rdf:nodeID="ub1bL51C30"/>
+    <rdfs:subClassOf rdf:resource="http://www.sw.fr/isa/agro#Animal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#Leaf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <agro:isPartOf rdf:resource="http://www.sw.fr/isa/agro#Plant"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="ub1bL51C30">
+    <owl:allValuesFrom rdf:resource="http://www.sw.fr/isa/agro#Animal"/>
+    <owl:onProperty rdf:resource="http://www.sw.fr/isa/agro#eats"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#leaf1">
+    <agro:isPartOf rdf:resource="http://www.sw.fr/isa/agro#p1"/>
+    <rdf:type rdf:resource="http://www.sw.fr/isa/agro#Leaf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.sw.fr/isa/agro#Cow">
+    <rdfs:subClassOf rdf:resource="http://www.sw.fr/isa/agro#Herbivore"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+</rdf:RDF>
