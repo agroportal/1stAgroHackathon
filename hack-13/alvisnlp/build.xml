@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+
+<project name="AlvisNLP" default="jarfiles" basedir=".">
+
+  <tstamp/>
+  <property name="pwd" value="${user.dir}" />
+  <!--hostinfo prefix="thehost" /-->
+  <property name="hostname" value="lguest-83" />
+  
+  <property name="jarfile.location" value="${pwd}/lib"/>
+  <property name="core.jarfile" value="${jarfile.location}/alvisnlp-core.jar"/>
+  <property name="bibliome.jarfile" value="${jarfile.location}/alvisnlp-bibliome.jar"/>
+  <property name="resources.jarfile" value="${jarfile.location}/alvisnlp-resources.jar"/>
+
+  <property file="version.properties" />
+  <property file="build.properties" />
+
+  <property name="libs" value="${tuprolog.jarfile}:${json-simple.jarfile}:${weka.jarfile}:${jline.jarfile}:${xalan.jarfiles}:${nekohtml.jarfile}:${lucene.jarfiles}:${obo.jarfiles}:${drmaa.jarfile}:${bibliome-utils.jarfile}:${alvisir2-core.jarfile}:${jena.jarfiles}:${stanford.jarfiles}:${alvisdb.jarfile}:${nanohttpd.jarfile}"/>
+
+
+
+  <target name="all" depends="jarfiles,doc" />
+
+
+  <target name="jarfiles" depends="alvisnlp-bibliome"/>
+
+  <target name="alvisnlp-bibliome" depends="alvisnlp-core">
+    <ant dir="bibliome" target="jarfile"/>
+    <ant dir="bibliome" target="resources.jarfile"/>
+  </target>
+
+  <target name="alvisnlp-core">
+    <copy file="${defaultParamValues.file}" tofile="core/src/alvisnlp/app/cli/default-param-values.xml"/>
+    <ant dir="core" target="jarfile"/>
+  </target>
+
+  <target name="apidoc">
+    <mkdir dir="doc/api" />
+    <javadoc
+	classpath="${libs}:${java.class.path}"
+	sourcepath="core/src"
+	destdir="doc/api"
+	>
+      <arg value="-quiet" />
+      <arg value="-use" />
+      <arg line="-doctitle 'AlvisNLP API Reference'" />
+    </javadoc>
+  </target>
+
+  <target name="doc" depends="guides,xhtml,apidoc" />
+
+  <target name="guides" depends="jarfiles">
+    <property name="cp" value="${libs}:${core.jarfile}:${bibliome.jarfile}:${java.class.path}"/>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLP"
+	  output="doc/supported_modules.txt">
+      <arg value="-supportedModules"/>
+    </java>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLP"
+	  output="doc/RegExp.txt">
+      <arg line="-noColors -moduleDoc RegExp"/>
+    </java>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLP">
+      <arg line="-log doc/examples/numbers.log"/>
+      <arg value="doc/examples/numbers.xml"/>
+    </java>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLP">
+      <arg line="-log doc/examples/numbers_dump.log"/>
+      <arg value="doc/examples/numbers_dump.xml"/>
+    </java>
+    <delete file="corpus.xml"/>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLPDocumentation"
+	  logError="true"
+	  output="doc/BibliomeModuleFactory.tex">
+      <arg value="-transformer"/>
+      <arg value="share/alvisnlp-doc2latex.xslt"/>
+      <arg value="-converters"/>
+      <arg value="-libraries"/>
+      <arg value="-simpleSort"/>
+    </java>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLP"
+	  logError="true"
+	  error="/dev/null"
+	  outputproperty="ver">
+      <arg value="-version"/>
+    </java>
+    <echo message="\newcommand{\version}{${ver}}" file="doc/version.tex"/>
+    <ant dir="doc" />
+  </target>
+
+  <target name="clean.guides">
+    <delete file="doc/examples/numbers.log"/>
+    <delete file="doc/examples/numbers_dump.log"/>
+    <delete file="numbers.corpus"/>
+    <ant dir="doc" target="clean" />
+  </target>
+
+  <target name="man" depends="jarfiles">
+    <property name="cp" value="${core.jarfile}:${bibliome.jarfile}:${java.class.path}"/>
+    <mkdir dir="doc/man/man7"/>
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLPDocumentation"
+	  logError="true">
+      <arg value="-transformer"/>
+      <arg value="share/alvisnlp-doc2man.xslt"/>
+      <arg value="-converters"/>
+      <arg value="-pattern"/>
+      <arg value="doc/man/man7/%b.7"/>
+    </java>
+  </target>
+
+  <target name="clean.man">
+    <delete dir="doc/man"/>
+  </target>
+
+  <target name="xhtml" depends="jarfiles">
+    <property name="cp" value="${libs}:${core.jarfile}:${bibliome.jarfile}:${java.class.path}"/>
+    <mkdir dir="doc/html/module"/>
+    <mkdir dir="doc/html/converter"/>
+    <mkdir dir="doc/html/library"/>
+    <!-- Modules -->
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLPDocumentation"
+	  logError="true">
+      <arg value="-transformer"/>
+      <arg value="share/alvisnlp-doc2xhtml.xslt"/>
+      <arg value="-pattern"/>
+      <arg value="doc/html/module/%b.html"/>
+      <arg value="-param"/>
+      <arg value="copyright"/>
+      <arg value="Copyright 2010, 2011, 2012 Institut National de la Recherche Agronomique"/>
+    </java>
+    <!-- Converters -->
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLPDocumentation"
+	  logError="true">
+      <arg value="-transformer"/>
+      <arg value="share/alvisnlp-doc2xhtml.xslt"/>
+      <arg value="-converters"/>
+      <arg value="-noModules"/>
+      <arg value="-pattern"/>
+      <arg value="doc/html/converter/%b.html"/>
+      <arg value="-param"/>
+      <arg value="copyright"/>
+      <arg value="Copyright 2010, 2011, 2012 Institut National de la Recherche Agronomique"/>
+    </java>
+    <!-- Libraries -->
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLPDocumentation"
+	  logError="true">
+      <arg value="-transformer"/>
+      <arg value="share/alvisnlp-doc2xhtml.xslt"/>
+      <arg value="-libraries"/>
+      <arg value="-noModules"/>
+      <arg value="-pattern"/>
+      <arg value="doc/html/library/%b.html"/>
+      <arg value="-param"/>
+      <arg value="copyright"/>
+      <arg value="Copyright 2010, 2011, 2012 Institut National de la Recherche Agronomique"/>
+    </java>
+    <!-- List -->
+    <java fork="yes"
+	  classpath="${cp}"
+	  classname="alvisnlp.app.cli.AlvisNLPDocumentation"
+	  logError="true"
+	  output="doc/html/index.html">
+      <arg value="-transformer"/>
+      <arg value="share/alvisnlp-doclist2xhtml.xslt"/>
+      <arg value="-converters"/>
+      <arg value="-libraries"/>
+      <arg value="-list"/>
+      <arg value="-param"/>
+      <arg value="copyright"/>
+      <arg value="Copyright 2010, 2011, 2012 Institut National de la Recherche Agronomique"/>
+      <arg value="-param"/>
+      <arg value="title"/>
+      <arg value="Bibliome Module Factory"/>
+    </java>
+    <copy file="share/alvisnlp-doc.css" todir="doc/html"/>
+  </target>
+
+  <target name="clean.xhtml">
+    <delete dir="doc/html"/>
+  </target>
+
+  <target name="clean.alvisnlp">
+    <delete file="core/src/alvisnlp/app/cli/default-param-values.xml"/>
+    <ant dir="core" target="clean.build"/>
+  </target>
+
+  <target name="realclean.alvisnlp" depends="clean.alvisnlp">
+    <ant dir="core" target="clean.jarfile"/>
+  </target>
+
+  <target name="clean.alvisnlp-bibliome">
+    <ant dir="bibliome" target="clean.build"/>
+  </target>
+
+  <target name="realclean.alvisnlp-bibliome" depends="clean.alvisnlp-bibliome">
+    <ant dir="bibliome" target="clean.jarfile"/>
+  </target>
+
+  <target name="clean.apidoc">
+    <delete dir="doc/api" />
+  </target>
+
+  <target name="clean" depends="clean.alvisnlp, clean.alvisnlp-bibliome, clean.guides, clean.man"/>
+
+  <target name="realclean" depends="realclean.alvisnlp, realclean.alvisnlp-bibliome, clean.apidoc, clean.guides, clean.man, clean.xhtml">
+    <ant dir="doc" target="distclean"/>
+  </target>
+
+
+
+  <target name="package" depends="realclean">
+    <property
+	name="targetdir"
+	value="alvisnlp-${alvisnlp.version}"
+	/>
+    <mkdir
+	dir="${targetdir}" />
+    <copy
+	todir="${targetdir}">
+      <fileset
+	  dir="."
+	  includes="build.properties build.xml install.sh LICENSE make-java-launcher.sh NOTICE README revision.sh version.properties bibliome/** core/** doc/** javacc-5.0/** lib/** regression/** share/**"
+	  excludes="**/eclipse-build/** **/.classpath **/.project **/.settings/** lib/alvisnlp-bibliome.jar lib/alvisnlp-resources.jar lib/alvisnlp-core.jar"
+	  />
+    </copy>
+    <chmod
+	perm="+x">
+      <fileset
+	  dir="${targetdir}"
+	  includes="**/install.sh **/make-java-launcher.sh **/revision.sh"
+	  />
+    </chmod>
+    <tar
+	destfile="${targetdir}.tar.gz"
+	compression="gzip"
+	longfile="posix"
+	>
+      <tarfileset
+	  dir="."
+	  filemode="755"
+	  includes="${targetdir}/install.sh ${targetdir}/make-java-launcher.sh ${targetdir}/revision.sh"
+	  />
+      <tarfileset
+	  dir="."
+	  includes="${targetdir}/**/*"
+	  excludes="${targetdir}/install.sh ${targetdir}/make-java-launcher.sh ${targetdir}/revision.sh"
+	  />
+    </tar>
+  </target>
+
+</project>

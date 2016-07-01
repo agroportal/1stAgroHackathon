@@ -1,0 +1,70 @@
+<!--
+    alvisnlp
+    -verbose
+    -noColors
+    -param search subject word -param lemmatize active false  ## deactivate lemmatization
+    -param search subject plain  ## search inside words (deactivates lemmatization)
+    -param search subject prefix ## search at the beginning of words (deactivates lemmatization)
+    -param remove-overlaps active true ## longest only
+    -param lemmatize treeTaggerExecutable /home/rbossy/dist/tree-tagger/bin/tree-tagger
+    -param parFile /home/rbossy/dist/tree-tagger/english-par-linux-3.2.bin
+    -param write fileName "out.txt"
+    -param search dictFile dictionary-lemma.txt
+    -param search trieSource dictionary-lemma.trie
+    alvis-annotator.plan
+-->
+
+
+<alvisnlp-plan id="agro-annotator">
+  <read class="TextFileReader">
+    <!--<sourcePath>stream://stdin</sourcePath>-->
+    <sourcePath>stream://stdin</sourcePath>
+  </read>
+
+  <import>res://org.bibliome.alvisnlp.resources/segmentation.plan</import>
+
+  <lemmatize class="TreeTagger">
+    <treeTaggerExecutable>/home/rbossy/dist/tree-tagger/bin/tree-tagger</treeTaggerExecutable>
+    <parFile>/home/rbossy/dist/tree-tagger/english-par-linux-3.2.bin</parFile>
+    <noUnknownLemma/>
+  </lemmatize>
+
+  <search class="SimpleProjector2">
+    <dictFile >dictionary-lemma.txt</dictFile>
+    <targetLayerName>concepts</targetLayerName>
+    <valueFeatures>id,entry</valueFeatures>
+    <keyIndex>1</keyIndex>
+    <wordStartCaseInsensitive/>
+    <skipConsecutiveWhitespaces/>
+    <ignoreDiacritics/>
+    <caseInsensitive/> <!-- XXX -->
+    <!--<subject>word</subject>-->
+    <!--<subject>plain</subject>-->
+    <!--<subject>prefix</subject>-->
+    <!--<subject layer="words" features="form"/>-->
+    <subject layer="words" feature="lemma"/>
+    <trieSource>dictionary-lemma.trie</trieSource>
+  </search>
+
+  <remove-auxiliary-verbs class="Action">
+    <target>documents.sections.layer:concepts[span:words[@pos ^= "VH" or @pos ^= "VB"]]</target>
+    <action>delete</action>
+    <deleteElements/>
+  </remove-auxiliary-verbs>
+
+  <remove-overlaps class="RemoveOverlaps">
+    <active>false</active>
+    <layerName>concepts</layerName>
+  </remove-overlaps>
+
+  <write class="TabularExport">
+    <outDir inhibitCheck="true">/</outDir>
+    <files>$</files>
+    <fileName>"agro-alvis-out.txt"</fileName>
+    <lines>documents.sections.layer:concepts</lines>
+    <columns>
+      @id, int(start+1), end, @form, @entry
+    </columns>
+    <separator>,</separator>
+  </write>
+</alvisnlp-plan>
