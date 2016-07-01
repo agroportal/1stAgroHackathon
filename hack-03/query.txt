@@ -1,11 +1,11 @@
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  
 PREFIX owl: <OWL.getURI()>  
 PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> 
 PREFIX agront: <http://aims.fao.org/aos/agrontology#>  
 PREFIX dc: <DC.getURI()>  
-Construct { 
+CONSTRUCT { 
   ?cs rdf:type skos:ConceptScheme . 
   ?s rdf:type skos:Concept . 
   ?s skos:inScheme ?cs. 
@@ -27,64 +27,63 @@ Construct {
   ?s ?propAnn ?annVal . 
   ?dataProp rdfs:subPropertyOf skos:note . 
   ?s ?dataProp ?dataVal . 
-
 }
- where { 
-	  ?s rdf:type owl:Class . 
-	 FILTER (!isBlank(?s))
-	  OPTIONAL { 
-		  ?s rdfs:subClassOf ?subC . 
-		 FILTER (!isBlank(?subC)) 
-	 }
-	  OPTIONAL { 
-		  ?s rdfs:label ?label .
-	 }
-	  OPTIONAL { 
-	  ?s rdfs:comment ?def .
-	 }
-	  OPTIONAL { 
-	  ?cs rdf:type owl:Ontology .
-	 }
-	  OPTIONAL { 
-	  ?cs ?DCProp ?propertiesVal . 
-	  FILTER (STRSTARTS(STR(?DCProp), \http://purl.org/dc/terms\)) 
-	 }
-	  OPTIONAL { 
-	  ?s ?DCPropS ?propertiesValS . 
-	  FILTER (STRSTARTS(STR(?DCPropS), \http://purl.org/dc/terms\)) 
-	 }
-	  OPTIONAL { 
-	  ?s ?propAnn ?annVal . 
-	  ?propAnn rdf:type owl:AnnotationProperty . 
-	 }
-	  OPTIONAL { 
-	  ?s ?dataProp ?dataVal . 
-	  ?dataProp rdf:type owl:DatatypeProperty . 
-	 }
-	  OPTIONAL { 
-	  ?x rdf:type owl:Restriction . 
-	  ?x owl:onProperty ?restrictionP . 
-	  ?x owl:someValuesFrom|owl:allValuesFrom ?restrictionC . 
-	  ?s rdfs:subClassOf|owl:equivalentClass ?x . 
-	 }
-	  OPTIONAL { 
-	  {?s owl:equivalentClass ?intersertion . 
-	  ?intersertion owl:intersectionOf|owl:unionOf ?list .
-	  ?list rdf:rest*/rdf:first ?item . 
-	  ?item rdf:type owl:Class . 
-	  BIND (?item as ?itemSimple) . 
-	 } UNION {
-	  ?item owl:onProperty ?itemP . 
-	  ?item owl:someValuesFrom|owl:allValuesFrom ?itemC . 
-	 }
-	 }
-	  OPTIONAL { 
-		  ?p rdf:type owl:TransitiveProperty . 
-		  ?s ?p ?o . 
-	 }
-	  OPTIONAL { 
-	  ?p2 rdf:type owl:ObjectProperty . 
-	 FILTER NOT EXISTS { ?p2 rdf:type owl:TransitiveProperty } . 
-	  ?s ?p2 ?oRel . 
- 	}
+WHERE { 
+          ?s rdf:type owl:Class . 
+          FILTER (!isBlank(?s))
+          OPTIONAL { 
+            ?s rdfs:subClassOf ?subC . 
+            FILTER (!isBlank(?subC)) 
+     }
+      OPTIONAL { 
+          ?s rdfs:label ?label .
+     }
+      OPTIONAL { 
+      ?s rdfs:comment ?def .
+     }
+      OPTIONAL { 
+      ?cs rdf:type owl:Ontology .
+     }
+      OPTIONAL { 
+      ?cs ?DCProp ?propertiesVal . 
+      FILTER (STRSTARTS(STR(?DCProp), \http://purl.org/dc/terms\)) 
+     }
+      OPTIONAL { 
+      ?s ?DCPropS ?propertiesValS . 
+      FILTER (STRSTARTS(STR(?DCPropS), \http://purl.org/dc/terms\)) 
+     }
+      OPTIONAL { 
+      ?s ?propAnn ?annVal . 
+      ?propAnn rdf:type owl:AnnotationProperty . 
+     }
+      OPTIONAL { 
+      ?s ?dataProp ?dataVal . 
+      ?dataProp rdf:type owl:DatatypeProperty . 
+     }
+      OPTIONAL { 
+      ?x rdf:type owl:Restriction . 
+      ?x owl:onProperty ?restrictionP . 
+      ?x owl:someValuesFrom|owl:allValuesFrom ?restrictionC . 
+      ?s rdfs:subClassOf|owl:equivalentClass ?x . 
+     }
+      OPTIONAL { 
+      {?s owl:equivalentClass ?intersertion . 
+      ?intersertion owl:intersectionOf|owl:unionOf ?list .
+      ?list rdf:rest*/rdf:first ?item . 
+      ?item rdf:type owl:Class . 
+      BIND (?item as ?itemSimple) . 
+     } UNION {
+      ?item owl:onProperty ?itemP . 
+      ?item owl:someValuesFrom|owl:allValuesFrom ?itemC . 
+     }
+     }
+      OPTIONAL { 
+          ?p rdf:type owl:TransitiveProperty . 
+          ?s ?p ?o . 
+     }
+      OPTIONAL { 
+      ?p2 rdf:type owl:ObjectProperty . 
+     FILTER NOT EXISTS { ?p2 rdf:type owl:TransitiveProperty } . 
+      ?s ?p2 ?oRel . 
+    }
  }
