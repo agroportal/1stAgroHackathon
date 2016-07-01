@@ -1,0 +1,75 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix agro: <http://www.sw.fr/isa/agro#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.sw.fr/isa/agro#>
+    a <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
+
+agro:Animal
+    a owl:Class ;
+    rdfs:label "Animal"@en, "Animal"@fr, "Animale"@it ;
+    rdfs:subClassOf agro:LivingOrganism .
+
+agro:Carnivore
+    a owl:Class ;
+    rdfs:subClassOf agro:Animal ;
+    owl:equivalentClass [
+        a owl:Restriction ;
+        owl:allValuesFrom agro:Animal ;
+        owl:onProperty agro:eats
+    ] .
+
+agro:Cow
+    a owl:Class ;
+    rdfs:subClassOf agro:Herbivore .
+
+agro:Herbivore
+    a owl:Class ;
+    rdfs:subClassOf agro:Animal, [
+        a owl:Restriction ;
+        owl:allValuesFrom agro:Plant ;
+        owl:onProperty agro:eats
+    ], [
+        a owl:Restriction ;
+        owl:onProperty agro:eats ;
+        owl:someValuesFrom agro:Plant
+    ] .
+
+agro:Leaf
+    agro:isPartOf agro:Plant ;
+    a owl:Class .
+
+agro:LivingOrganism
+    a owl:Class ;
+    rdfs:comment "In biology, an organism is any contiguous living system, such as an animal, plant, fungus, or bacterium"@en ;
+    rdfs:label "Living Organism"@en, "Organisme Vivant"@fr, "Organismo Vivente"@it .
+
+agro:Plant
+    a owl:Class ;
+    rdfs:label "Plant"@en, "Planta"@it, "Plante"@fr ;
+    rdfs:subClassOf agro:LivingOrganism ;
+    owl:disjointWith agro:Animal .
+
+agro:eats
+    a owl:ObjectProperty .
+
+agro:isPartOf
+    a owl:TransitiveProperty ;
+    rdfs:domain agro:Leaf ;
+    rdfs:range agro:Plant .
+
+agro:leaf1
+    agro:isPartOf agro:p1 ;
+    a agro:Leaf .
+
+agro:name
+    a owl:DatatypeProperty ;
+    rdfs:domain agro:LivingOrganism ;
+    rdfs:range <http://www.w3.org/2001/XMLSchema#string> .
+
+agro:p1
+    agro:name "Platanus wrighitii"^^<http://www.w3.org/2001/XMLSchema#string> ;
+    a agro:Plant ;
+    rdfs:label "plant1"^^<http://www.w3.org/2001/XMLSchema#string> .
+
