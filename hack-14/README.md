@@ -7,6 +7,20 @@ Information extraction from publications on viticulture research.
 * https://github.com/agroportal/ontologies_api/tree/hack-14
 * https://github.com/agroportal/agroportal_web_ui/tree/hack-14
 
-### Sample extractor API call
+### API Documentation
 
-http://52.18.30.225:8080/agrohackathon-1.0/extract?url=http%3A%2F%2Fwww.agriculturejournals.cz%2FuniqueFiles%2F04084.pdf
+http://localhost:8090/agrohackathon-1.0/swagger-ui.html
+
+### Initial presentation on general idea
+
+data_mining_pdfs.pdf
+
+### Final presentation on outcomes
+
+AH_H14.pdf
+
+### Acknowledgments 
+
+A big thanks to everyone in the group for their hard work. 
+We did manage to produce something really usefull in a very short period of time (and did win the 1stAgroHackathon, so well done everyone!).
+

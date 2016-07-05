@@ -1,3 +1,9 @@
+# TODO
+
+* Different name for each created file (not "alvis_result.txt" for all)
+* Generate Alvis dict when new terms added to NCBO dict
+* Change STDIN when calling alvisnlp cmd
+
 # Hack 13 - changing recognizer
 
 Using alvis NLP
