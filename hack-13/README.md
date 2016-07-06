@@ -72,6 +72,8 @@ Annotator.config do |config|
 end
 ```
 
+* To change the `/annotator/recognizers` array: supported_recognizers = ["mgrep","alvis"] in ontologies_api
+
 ## Changing UI
 
 Just have to define the recognizer array in the annotator controller
